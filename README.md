@@ -1,7 +1,7 @@
 # Horse Race Simulator
 
 ## Overview
-The Horse Race Simulator is a Java-based console application that simulates a horse race. Users can configure the race length, number of horses, and assign lanes to each horse. The race progresses with each horse moving forward based on its confidence level, and the winner is determined when a horse reaches the finish line.
+This is a Java-based console game that simulates a horse race. The user can change the race length, number of horses, and assign lanes to each horse. Each horse has a confidence level which affects its likelihood of moving faster but also its chance of falling.
 
 ---
 
@@ -9,16 +9,16 @@ The Horse Race Simulator is a Java-based console application that simulates a ho
 
 ### Prerequisites
 - Java Development Kit (JDK) 8 or higher
-- A terminal or command prompt to run the application
+- Command prompt
 
 ### Steps to Run the Project Locally
-1. Clone or download the repository to your local machine.
-2. Navigate to the `Part1` directory where the source files are located.
-3. Compile the Java files using the following command:
+1. Download the repository to your local machine.
+2. Go to the `Part1` folder.
+3. Compile the Java files using:
    ```sh
    javac *.java
    ```
-4. Run the application using the following command:
+4. Run the game using:
    ```sh
    java Main
    ```
@@ -28,21 +28,21 @@ The Horse Race Simulator is a Java-based console application that simulates a ho
 ## Dependencies & Usage Guidelines
 
 ### Dependencies
-This project does not require any external libraries or dependencies. It uses only the standard Java Development Kit (JDK) classes.
+This game does not require any external libraries or dependencies as they are all included in the JDK.
 
 ### Usage Instructions
-1. **Start the Application**: Run the `Main` class as described in the setup instructions.
-2. **Configure the Race**:
-   - Enter the race length (must be a positive integer).
-   - Specify the number of horses participating in the race.
+1. **Start the Application**: Run the `Main` class.
+2. **Using the Race**:
+   - Choose the race distance.
+   - Specify the number of horses.
    - For each horse:
-     - Provide a name.
-     - Assign a single-character symbol.
-     - Set a confidence level between 0.0 and 1.0 (exclusive).
-   - Assign lanes to each horse (ensure the number of lanes is greater than or equal to the number of horses).
-3. **Run the Race**:
-   - The race will start, and the progress of each horse will be displayed in the console.
-   - The race ends when a horse reaches the finish line or all horses fall.
+     - Give a name.
+     - Give a symbol.
+     - Give a confidence level between 0.0 and 1.0 (exclusive).
+   - Assign which lane each horse will be running on.
+3. **The Actual Race**:
+   - The race will start the current race will be displayed in terminal.
+   - The race will end if a horse reaches the finish line or all the horses fall.
 4. **Repeat or Exit**:
    - After the race, you can type `QUIT` to exit or press `ENTER` to start a new race.
 
