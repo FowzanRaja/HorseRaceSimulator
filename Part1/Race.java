@@ -133,7 +133,7 @@ public class Race
         
         if(theHorse.hasFallen())
         {
-            System.out.print('\u2322');
+            System.out.print('❌');
         }
         else
         {
