@@ -7,7 +7,7 @@ public class Main {
 
         int raceLength;
         do {
-            System.out.print("Enter the race length ");
+            System.out.print("Enter the race length: ");
             while (!scanner.hasNextInt()) {
                 System.out.println("Must be positive. ");
                 scanner.next();
