@@ -6,14 +6,12 @@
  */
 
 public class Horse {
-    // Fields of class Horse
     private char symbol;
     private String name;
     private int distanceTravelled;
     private boolean fallen;
     private double confidence; 
 
-    // Constructor of class Horse
     public Horse(char horseSymbol, String horseName, double horseConfidence) {
         this.symbol = horseSymbol;
         this.name = horseName;
@@ -22,13 +20,10 @@ public class Horse {
         this.fallen = false;
     }
 
-    // Other methods of class Horse
     public void fall() {
         this.fallen = true;
 
-        if (this.confidence > 0.1) {
-            this.confidence = this.confidence - 0.1;
-        }
+        setConfidence(getConfidence() - 0.1);
     }
 
     public double getConfidence() {
@@ -63,7 +58,7 @@ public class Horse {
     }
 
     public void setConfidence(double newConfidence) {
-        if (newConfidence >= 0 && newConfidence <= 1) {
+        if (newConfidence > 0 && newConfidence <= 1) {
             this.confidence = newConfidence;
         }
     }
