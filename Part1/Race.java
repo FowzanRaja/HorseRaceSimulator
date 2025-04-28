@@ -48,6 +48,8 @@ public class Race
         lane1Horse.goBackToStart();
         lane2Horse.goBackToStart();
         lane3Horse.goBackToStart();
+
+        printRace();
                       
         while (!finished)
         {
