@@ -122,27 +122,25 @@ public class Race
         System.out.println();    
     }
     
-    private void printLane(Horse theHorse)
-    {
+    private void printLane(Horse theHorse) {
         int spacesBefore = theHorse.getDistanceTravelled();
         int spacesAfter = raceLength - theHorse.getDistanceTravelled();
-        
+
         System.out.print('|');
-        
-        multiplePrint(' ',spacesBefore);
-        
-        if(theHorse.hasFallen())
-        {
+
+        multiplePrint(' ', spacesBefore);
+
+        if (theHorse.hasFallen()) {
             System.out.print('❌');
-        }
-        else
-        {
+        } else {
             System.out.print(theHorse.getSymbol());
         }
-        
-        multiplePrint(' ',spacesAfter);
-        
+
+        multiplePrint(' ', spacesAfter);
+
         System.out.print('|');
+
+        System.out.print(" " + theHorse.getName() + " (Current confidence " + theHorse.getConfidence() + ")");
     }
 
     private void multiplePrint(char aChar, int times)
