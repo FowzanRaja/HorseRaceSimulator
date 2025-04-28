@@ -1,76 +1,74 @@
-
 /**
- * Write a description of class Horse here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ Represents a horse in the race simulation.
+ 
+ @author Fowzan Raja
+ @version 1.0
  */
-public class Horse
-{
-    //Fields of class Horse
-    
-    
-      
-    //Constructor of class Horse
-    /**
-     * Constructor for objects of class Horse
-     */
-    public Horse(char horseSymbol, String horseName, double horseConfidence)
-    {
-       
-    }
-    
-    
-    
-    //Other methods of class Horse
-    public void fall()
-    {
-        
-    }
-    
-    public double getConfidence()
-    {
-        
-    }
-    
-    public int getDistanceTravelled()
-    {
-        
-    }
-    
-    public String getName()
-    {
-        
-    }
-    
-    public char getSymbol()
-    {
-        
-    }
-    
-    public void goBackToStart()
-    {
-        
-    }
-    
-    public boolean hasFallen()
-    {
-        
+
+public class Horse {
+    // Fields of class Horse
+    private char symbol;
+    private String name;
+    private int distanceTravelled;
+    private boolean fallen;
+    private double confidence; 
+
+    // Constructor of class Horse
+    public Horse(char horseSymbol, String horseName, double horseConfidence) {
+        this.symbol = horseSymbol;
+        this.name = horseName;
+        this.confidence = horseConfidence;
+        this.distanceTravelled = 0;
+        this.fallen = false;
     }
 
-    public void moveForward()
-    {
-        
+    // Other methods of class Horse
+    public void fall() {
+        this.fallen = true;
+
+        if (this.confidence > 0.1) {
+            this.confidence = this.confidence - 0.1;
+        }
     }
 
-    public void setConfidence(double newConfidence)
-    {
-        
+    public double getConfidence() {
+        return this.confidence;
     }
-    
-    public void setSymbol(char newSymbol)
-    {
-        
+
+    public int getDistanceTravelled() {
+        return this.distanceTravelled;
     }
-    
+
+    public String getName() {
+        return this.name;
+    }
+
+    public char getSymbol() {
+        return this.symbol;
+    }
+
+    public void goBackToStart() {
+        this.distanceTravelled = 0;
+        this.fallen = false;
+    }
+
+    public boolean hasFallen() {
+        return this.fallen;
+    }
+
+    public void moveForward() {
+        if (!this.fallen) {
+            this.distanceTravelled++;
+        }
+    }
+
+    public void setConfidence(double newConfidence) {
+        if (newConfidence >= 0 && newConfidence <= 1) {
+            this.confidence = newConfidence;
+        }
+    }
+
+    public void setSymbol(char newSymbol) {
+        this.symbol = newSymbol;
+    }
 }
