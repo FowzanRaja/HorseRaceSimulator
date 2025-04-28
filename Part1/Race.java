@@ -102,24 +102,23 @@ public class Race
         }
     }
     
-    private void printRace()
-    {
-        System.out.print('\u000C');  //clear the terminal window
-        
-        multiplePrint('=',raceLength+3); //top edge of track
+    private void printRace() {
+        System.out.print('\u000C');  // Clear the terminal window
+
+        multiplePrint('=', raceLength + 4); // Top edge of the track
         System.out.println();
-        
+
         printLane(lane1Horse);
         System.out.println();
-        
+
         printLane(lane2Horse);
         System.out.println();
-        
+
         printLane(lane3Horse);
         System.out.println();
-        
-        multiplePrint('=',raceLength+3); //bottom edge of track
-        System.out.println();    
+
+        multiplePrint('=', raceLength + 4); // Bottom edge of the track
+        System.out.println();
     }
     
     private void printLane(Horse theHorse) {
@@ -133,7 +132,7 @@ public class Race
         if (theHorse.hasFallen()) {
             System.out.print('❌');
         } else {
-            System.out.print(theHorse.getSymbol());
+            System.out.print(theHorse.getSymbol() + " "); 
         }
 
         multiplePrint(' ', spacesAfter);
