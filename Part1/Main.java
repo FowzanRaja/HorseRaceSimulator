@@ -5,13 +5,11 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Welcome to the Horse Race Simulator!");
-
         int raceLength;
         do {
-            System.out.print("Enter the race length (positive integer): ");
+            System.out.print("Enter the race length ");
             while (!scanner.hasNextInt()) {
-                System.out.println("Invalid input. Please enter a positive integer.");
+                System.out.println("Must be positive. ");
                 scanner.next();
             }
             raceLength = scanner.nextInt();
@@ -22,9 +20,9 @@ public class Main {
 
         int numberOfHorses;
         do {
-            System.out.print("Enter the number of horses (positive integer): ");
+            System.out.print("Enter the number of horses: ");
             while (!scanner.hasNextInt()) {
-                System.out.println("Invalid input. Please enter a positive integer.");
+                System.out.println("Must be positive.");
                 scanner.next();
             }
             numberOfHorses = scanner.nextInt();
@@ -33,7 +31,7 @@ public class Main {
 
         ArrayList<Horse> horses = new ArrayList<>();
         for (int i = 1; i <= numberOfHorses; i++) {
-            System.out.println("Configuring Horse " + i + ":");
+            System.out.println("Horse " + i + ":");
 
             System.out.print("Enter the name of the horse: ");
             String name = scanner.nextLine();
@@ -46,7 +44,7 @@ public class Main {
                     symbol = input.charAt(0);
                     break;
                 } else {
-                    System.out.println("Invalid input. Please enter a single character.");
+                    System.out.println("Must be a single character.");
                 }
             } while (true);
 
@@ -54,7 +52,7 @@ public class Main {
             do {
                 System.out.print("Enter the confidence level between 0.0 to 1.0 (exclusive): ");
                 while (!scanner.hasNextDouble()) {
-                    System.out.println("Invalid input. Please enter a number between 0.0 and 1.0.");
+                    System.out.println("Invalid input. ");
                     scanner.next();
                 }
                 confidence = scanner.nextDouble();
@@ -74,7 +72,7 @@ public class Main {
         do {
             System.out.print("Enter the number of lanes (must be >= number of horses): ");
             while (!scanner.hasNextInt()) {
-                System.out.println("Invalid input. Please enter a positive integer.");
+                System.out.println("Invalid input. ");
                 scanner.next();
             }
             numberOfLanes = scanner.nextInt();
@@ -87,14 +85,14 @@ public class Main {
             do {
                 System.out.print("Assign a lane for Horse " + horses.get(i - 1).getName() + " (1 to " + numberOfLanes + "): ");
                 while (!scanner.hasNextInt()) {
-                    System.out.println("Invalid input. Please enter a lane number between 1 and " + numberOfLanes + ".");
+                    System.out.println("Invalid input. Enter a lane number between 1 and " + numberOfLanes + ".");
                     scanner.next();
                 }
                 laneNumber = scanner.nextInt();
                 if (laneNumber < 1 || laneNumber > numberOfLanes) {
-                    System.out.println("Invalid lane number. Please choose a lane between 1 and " + numberOfLanes + ".");
+                    System.out.println("Invalid lane number. Enter a lane between 1 and " + numberOfLanes + ".");
                 } else if (occupiedLanes[laneNumber - 1]) {
-                    System.out.println("Lane " + laneNumber + " is already occupied. Please choose a different lane.");
+                    System.out.println("Lane " + laneNumber + " is already being used.");
                 } else {
                     break;
                 }
@@ -105,10 +103,8 @@ public class Main {
             occupiedLanes[laneNumber - 1] = true;
         }
 
-        System.out.println("Horses have been assigned to lanes. Empty lanes will remain unoccupied.");
-
         String userInput = "";
-        while (!userInput.equalsIgnoreCase("QUIT")) {
+        while (!userInput.equals("QUIT")) {
             for (Horse horse : horses) {
                 horse.goBackToStart();
             }
