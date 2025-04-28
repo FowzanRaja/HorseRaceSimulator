@@ -54,6 +54,14 @@ public class Race
             moveHorse(lane1Horse);
             moveHorse(lane2Horse);
             moveHorse(lane3Horse);
+
+            if (raceWonBy(lane1Horse)) {
+                lane1Horse.setConfidence(lane1Horse.getConfidence() + 0.1);
+            } else if (raceWonBy(lane2Horse)) {
+                lane2Horse.setConfidence(lane2Horse.getConfidence() + 0.1);
+            } else if (raceWonBy(lane3Horse)) {
+                lane3Horse.setConfidence(lane3Horse.getConfidence() + 0.1);
+            }
                         
             printRace();
             
