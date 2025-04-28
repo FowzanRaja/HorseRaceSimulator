@@ -2,12 +2,13 @@ import java.util.concurrent.TimeUnit;
 import java.lang.Math;
 
 /**
- * A three-horse race, each horse running in its own lane
- * for a given distance
- * 
- * @author McRaceface
- * @version 1.0
+ A three-horse race, each horse running in its own lane
+ for a given distance
+ 
+ @author Fowzan Raja
+ @version 2.0
  */
+
 public class Race
 {
     private int raceLength;
@@ -83,8 +84,14 @@ public class Race
             printRace();
             
             //if any of the three horses has won the race is finished
-            if ( raceWonBy(lane1Horse) || raceWonBy(lane2Horse) || raceWonBy(lane3Horse) )
-            {
+            if (raceWonBy(lane1Horse)) {
+                System.out.println("And the winner is... " + lane1Horse.getName() + "!");
+                finished = true;
+            } else if (raceWonBy(lane2Horse)) {
+                System.out.println("And the winner is... " + lane2Horse.getName() + "!");
+                finished = true;
+            } else if (raceWonBy(lane3Horse)) {
+                System.out.println("And the winner is... " + lane3Horse.getName() + "!");
                 finished = true;
             }
            
