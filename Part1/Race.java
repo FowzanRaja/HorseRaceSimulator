@@ -1,136 +1,108 @@
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
-import java.lang.Math;
 
-/**
- @author Fowzan Raja
- @version 2.0
- */
-
-public class Race
-{
+public class Race {
     private int raceLength;
-    private Horse lane1Horse;
-    private Horse lane2Horse;
-    private Horse lane3Horse;
+    private ArrayList<Horse> lanes;
 
-    public Race(int distance)
-    {
+    public Race(int distance) {
         raceLength = distance;
-        lane1Horse = null;
-        lane2Horse = null;
-        lane3Horse = null;
+        lanes = new ArrayList<>();
     }
-    
-    public void addHorse(Horse theHorse, int laneNumber)
-    {
-        if (laneNumber == 1)
-        {
-            lane1Horse = theHorse;
+
+    public void addHorse(Horse theHorse, int laneNumber) {
+        while (lanes.size() < laneNumber) {
+            lanes.add(null);
         }
-        else if (laneNumber == 2)
-        {
-            lane2Horse = theHorse;
-        }
-        else if (laneNumber == 3)
-        {
-            lane3Horse = theHorse;
-        }
-        else
-        {
-            System.out.println("Cannot add horse to lane " + laneNumber + " because there is no such lane");
-        }
+        lanes.set(laneNumber - 1, theHorse);
     }
-    
-    public void startRace()
-    {
+
+    public void startRace() {
         boolean finished = false;
-        
-        lane1Horse.goBackToStart();
-        lane2Horse.goBackToStart();
-        lane3Horse.goBackToStart();
+
+        for (Horse horse : lanes) {
+            if (horse != null) {
+                horse.goBackToStart();
+            }
+        }
 
         printRace();
-                      
-        while (!finished)
-        {
-            moveHorse(lane1Horse);
-            moveHorse(lane2Horse);
-            moveHorse(lane3Horse);
 
-            if (raceWonBy(lane1Horse)) {
-                lane1Horse.setConfidence(lane1Horse.getConfidence() + 0.1);
-            } else if (raceWonBy(lane2Horse)) {
-                lane2Horse.setConfidence(lane2Horse.getConfidence() + 0.1);
-            } else if (raceWonBy(lane3Horse)) {
-                lane3Horse.setConfidence(lane3Horse.getConfidence() + 0.1);
+        while (!finished) {
+            boolean allFallen = true;
+
+            for (Horse horse : lanes) {
+                if (horse != null) {
+                    moveHorse(horse);
+                    if (!horse.hasFallen()) {
+                        allFallen = false;
+                    }
+                }
             }
-                        
-            printRace();
-            
-            if (raceWonBy(lane1Horse)) {
-                System.out.println("And the winner is... " + lane1Horse.getName() + "!");
-                finished = true;
-            } else if (raceWonBy(lane2Horse)) {
-                System.out.println("And the winner is... " + lane2Horse.getName() + "!");
-                finished = true;
-            } else if (raceWonBy(lane3Horse)) {
-                System.out.println("And the winner is... " + lane3Horse.getName() + "!");
-                finished = true;
+
+            if (allFallen) {
+                printRace();
+                System.out.println("All the horses have fallen.");
+                break;
             }
-           
-            try{ 
+
+            for (Horse horse : lanes) {
+                if (horse != null && raceWonBy(horse)) {
+                    horse.setConfidence(horse.getConfidence() + 0.1);
+                    printRace();
+                    System.out.println("And the winner is... " + horse.getName() + "!");
+                    finished = true;
+                    break;
+                }
+            }
+
+            if (!finished) {
+                printRace();
+            }
+
+            try {
                 TimeUnit.MILLISECONDS.sleep(100);
-            }catch(Exception e){}
+            } catch (Exception e) {
+            }
         }
     }
-    
-    private void moveHorse(Horse theHorse)
-    {
-        if  (!theHorse.hasFallen())
-        {
-            if (Math.random() < theHorse.getConfidence())
-            {
-               theHorse.moveForward();
+
+    private void moveHorse(Horse theHorse) {
+        if (!theHorse.hasFallen()) {
+            if (Math.random() < theHorse.getConfidence()) {
+                theHorse.moveForward();
             }
-            
-            if (Math.random() < (0.1*theHorse.getConfidence()*theHorse.getConfidence()))
-            {
+
+            if (Math.random() < (0.1 * theHorse.getConfidence() * theHorse.getConfidence())) {
                 theHorse.fall();
             }
         }
     }
-        
-    private boolean raceWonBy(Horse theHorse)
-    {
-        if (theHorse.getDistanceTravelled() == raceLength)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+
+    private boolean raceWonBy(Horse theHorse) {
+        return theHorse.getDistanceTravelled() == raceLength;
     }
-    
+
     private void printRace() {
         clearScreen();
 
         multiplePrint('=', raceLength + 4);
         System.out.println();
 
-        printLane(lane1Horse);
-        System.out.println();
-
-        printLane(lane2Horse);
-        System.out.println();
-
-        printLane(lane3Horse);
-        System.out.println();
+        for (int i = 0; i < lanes.size(); i++) {
+            Horse horse = lanes.get(i);
+            if (horse != null) {
+                printLane(horse);
+            } else {
+                System.out.print("|" + " ".repeat(raceLength) + "  |");
+            }
+            System.out.println();
+        }
 
         multiplePrint('=', raceLength + 4);
         System.out.println();
     }
-    
+
     private void printLane(Horse theHorse) {
         int spacesBefore = theHorse.getDistanceTravelled();
         int spacesAfter = raceLength - theHorse.getDistanceTravelled();
@@ -142,7 +114,7 @@ public class Race
         if (theHorse.hasFallen()) {
             System.out.print('❌');
         } else {
-            System.out.print(theHorse.getSymbol() + " "); 
+            System.out.print(theHorse.getSymbol() + " ");
         }
 
         multiplePrint(' ', spacesAfter);
@@ -152,17 +124,12 @@ public class Race
         System.out.print(" " + theHorse.getName() + " (Current confidence " + theHorse.getConfidence() + ")");
     }
 
-    private void multiplePrint(char aChar, int times)
-    {
-        int i = 0;
-        while (i < times)
-        {
+    private void multiplePrint(char aChar, int times) {
+        for (int i = 0; i < times; i++) {
             System.out.print(aChar);
-            i = i + 1;
         }
     }
 
-    // Helper method to clear the screen in cmd
     private void clearScreen() {
         try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
