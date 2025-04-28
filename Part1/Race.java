@@ -113,9 +113,9 @@ public class Race
     }
     
     private void printRace() {
-        System.out.print('\u000C');  // Clear the terminal window
+        clearScreen();
 
-        multiplePrint('=', raceLength + 4); // Top edge of the track
+        multiplePrint('=', raceLength + 4);
         System.out.println();
 
         printLane(lane1Horse);
@@ -127,7 +127,7 @@ public class Race
         printLane(lane3Horse);
         System.out.println();
 
-        multiplePrint('=', raceLength + 4); // Bottom edge of the track
+        multiplePrint('=', raceLength + 4);
         System.out.println();
     }
     
@@ -159,6 +159,15 @@ public class Race
         {
             System.out.print(aChar);
             i = i + 1;
+        }
+    }
+
+    // Helper method to clear the screen in cmd
+    private void clearScreen() {
+        try {
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } catch (Exception e) {
+            System.out.println("Error clearing screen: " + e.getMessage());
         }
     }
 }
