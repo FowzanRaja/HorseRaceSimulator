@@ -43,10 +43,6 @@ This game does not require any external libraries or dependencies as they are al
 3. **The Actual Race**:
    - The race will start the current race will be displayed in terminal.
    - The race will end if a horse reaches the finish line or all the horses fall.
+   - The horses' confidence will increase if they win, and decrease if they fall.
 4. **Repeat or Exit**:
    - After the race, you can type `QUIT` to exit or press `ENTER` to start a new race.
-
----
-
-## Additional Notes
-- The confidence level of a horse increases slightly after winning a race, making it more likely to succeed in subsequent races.
